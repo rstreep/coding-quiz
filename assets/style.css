@@ -1,0 +1,87 @@
+header {
+    display: flex;
+    height: 150px;
+    background-color: maroon;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+    font-size: 50px;
+}
+
+#timer {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-right: 30px;
+    /* border: 5px solid white; */
+    height: 100px;
+    font-size: 30px;
+}
+
+#leaderboard {
+    color: white;
+    /* border: 5px solid white; */
+    margin-left: 30px;
+    font-size: 20px;
+}
+section {
+    display: flex;
+    height: 800px;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    height: 500px;
+    width: 1000px;
+    padding-left: 30px;
+    background-color: gray;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid black;
+    border-radius: 3%;
+}
+
+.card h2 {
+    margin-top: 30px;
+    margin-right: 30px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    height: 50px;
+    color: white;
+    border-bottom: 2px solid white;
+    font-size: 40px;
+    text-align: center;
+}
+
+.card ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 600px;
+    margin-right: 30px;
+    color: white;
+    font-size: 20px;
+    list-style-type: circle;
+}
+
+.card li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.card footer {
+    height: 50px;
+    color: white;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    padding-left: 20px;
+    padding-top: 10px;
+    border-top: 2px solid white;
+    font-size: 30px;
+    text-align: center;
+}
