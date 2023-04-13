@@ -1,3 +1,4 @@
+/* header for quiz */
 header {
     display: flex;
     height: 150px;
@@ -10,7 +11,7 @@ h1 {
     color: white;
     font-size: 50px;
 }
-
+/* start quiz button */
 #start {
     display: flex;
     justify-content: center;
@@ -27,7 +28,7 @@ h1 {
 #start:hover {
     cursor: pointer;
 }
-
+/* timer header element */
 #timer {
     display: flex;
     align-items: center;
@@ -36,19 +37,20 @@ h1 {
     height: 100px;
     font-size: 30px;
 }
- 
+/* leaderboard header element */
 #leaderboard {
     color: white;
     margin-left: 30px;
     font-size: 20px;
 }
+/* flex area for quiz */
  section {
     display: flex;
     height: 800px;
     justify-content: center;
     align-items: center;
 }
-
+/* quiz card general */
 #quiz {
     display: flex;
     height: 500px;
@@ -76,6 +78,7 @@ h1 {
     border-radius: 25%;
 } */
 
+/* question choices */
 #quiz ul {
     display: flex;
     flex-direction: column;

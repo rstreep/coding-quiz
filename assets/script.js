@@ -1,3 +1,5 @@
+
+// variables for different parts of the quiz
 var start = document.querySelector('#start');
 var quiz = document.querySelector('#quiz');
 // var question = document.querySelector('#question');
@@ -44,17 +46,19 @@ var questions = [
       correct: "B"},
 ]
 
+// start quiz 
+
 start.onclick = function() {
     startQuiz();
 };
-
+// hides start button and displays questions card
 function startQuiz(){
     start.style.display = "none";
     quiz.style.display = "flex";
 
     renderQuestion(currentQuestionIndex);
 }
-
+// displays question properties based on array and checks user answer
 function renderQuestion(currentQuestion) {
     var q = questions[currentQuestion];
     question.innerText = q.question;
@@ -64,7 +68,6 @@ function renderQuestion(currentQuestion) {
     optionC.innerText = q.choiceC;
     optionD.innerText = q.choiceD;
 
-    //copy and paste below for B,C,D
     optionA.onclick = function() {
         checkAnswer("A", currentQuestionIndex);
         currentQuestionIndex+=1;
@@ -106,7 +109,7 @@ function renderQuestion(currentQuestion) {
         }
     };
 }
-
+// incomplete: adds user score and decreases time based on correct/incorrect inputs
 function checkAnswer(userAnswer, questionNumber){
     if(questions[questionNumber].correct == userAnswer){
         console.log('is correct');
@@ -116,7 +119,7 @@ function checkAnswer(userAnswer, questionNumber){
         time - 10;
     }
 }
-
+// incomplete: hides questions card and displays end result screen with score and username prompt to save score to local storage
 function endResult() {
     console.log("end");
     quiz.style.display = "none";
