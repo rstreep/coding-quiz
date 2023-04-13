@@ -1,13 +1,15 @@
 var start = document.querySelector('#start');
 var quiz = document.querySelector('#quiz');
-var question = document.querySelector('#question');
+// var question = document.querySelector('#question');
+var question = document.getElementById("question");
 var optionA = document.querySelector('#optionA');
 var optionB = document.querySelector('#optionB');
 var optionC = document.querySelector('#optionC');
 var optionD = document.querySelector('#optionD');
 var username = "";
 var score = 0;
-var timerEl;
+var time = 99;
+var currentQuestionIndex = 0;
 
 var questions = [
     { question: "Question 1 goes here?",
@@ -41,42 +43,81 @@ var questions = [
       choiceD: "Choice D goes here! 5",
       correct: "B"},
 ]
-var lastQuestion = questions.length -1;
-var currentQuestion = 0;
 
-function renderQuestion() {
-    var q = questions[currentQuestion];
-    question.innerHTML = "<p>" + q.question + "</p>";
-    choiceA.innerHTML = q.choiceA;
-    choiceB.innerHTML = q.choiceB;
-    choiceC.innerHTML = q.choiceC;
-    choiceD.innerHTML = q.choiceD;
-}
-
-currentQuestion = 0;
-renderQuestion()
-
-currentQuestion++;
-renderQuestion()
-
-
-
-start.addEventListener('click', startQuiz);
+start.onclick = function() {
+    startQuiz();
+};
 
 function startQuiz(){
     start.style.display = "none";
-    timerEl = 99;
-    timerEl = setInterval()
-    quiz.style.display = "block";
-    console.log('hello');
+    quiz.style.display = "flex";
+
+    renderQuestion(currentQuestionIndex);
 }
 
+function renderQuestion(currentQuestion) {
+    var q = questions[currentQuestion];
+    question.innerText = q.question;
 
+    optionA.innerText = q.choiceA;
+    optionB.innerText = q.choiceB;
+    optionC.innerText = q.choiceC;
+    optionD.innerText = q.choiceD;
 
-function checkAnswer(A){
-    if(questions[currentQuestion].correct == answer){
+    //copy and paste below for B,C,D
+    optionA.onclick = function() {
+        checkAnswer("A", currentQuestionIndex);
+        currentQuestionIndex+=1;
+       
+        if (currentQuestionIndex <= questions.length-1) {
+            renderQuestion(currentQuestionIndex);
+        } else{
+            endResult();
+        }
+    };
+    optionB.onclick = function() {
+        checkAnswer("B", currentQuestionIndex);
+        currentQuestionIndex+=1;
+       
+        if (currentQuestionIndex <= questions.length-1) {
+            renderQuestion(currentQuestionIndex);
+        } else{
+            endResult();
+        }
+    };
+    optionC.onclick = function() {
+        checkAnswer("C", currentQuestionIndex);
+        currentQuestionIndex+=1;
+       
+        if (currentQuestionIndex <= questions.length-1) {
+            renderQuestion(currentQuestionIndex);
+        } else{
+            endResult();
+        }
+    };
+    optionD.onclick = function() {
+        checkAnswer("D", currentQuestionIndex);
+        currentQuestionIndex+=1;
+       
+        if (currentQuestionIndex <= questions.length-1) {
+            renderQuestion(currentQuestionIndex);
+        } else{
+            endResult();
+        }
+    };
+}
+
+function checkAnswer(userAnswer, questionNumber){
+    if(questions[questionNumber].correct == userAnswer){
+        console.log('is correct');
         score + 20;
     } else {
+        console.log('is wrong');
         time - 10;
     }
+}
+
+function endResult() {
+    console.log("end");
+    quiz.style.display = "none";
 }
