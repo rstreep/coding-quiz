@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style.css">
     <title>Coding Quiz</title>
 </head>
+
 <body>
-    <header>
-        <div id="leaderboard">Leaderboard 🏆</div>
-        <h1>Coding Quiz!</h1>
-        <div id="timer">Time: 99</div>
-    </header>
-    <section>
-        <div id="start">Start quiz!</div>
-        <card id="quiz" style="display: none;">
-        <h3 id="question"></h3>
-        <ul id="choices">
-            <li class="choices" id="optionA"></li>
-            <li class="choices" id="optionB"></li>
-            <li class="choices" id="optionC"></li>
-            <li class="choices" id="optionD"></li>
-        </ul>
-    </section>
-    </card>
+    <div class="container">
+        <div class="header">
+            <h1>Coding Quiz!</h1>
+            <div id="timer" class="my-4">
+                Time Remaining: <span id="time-remaining">90</span> seconds
+            </div>
+        </div>
+        <h1 class="mt-4"></h1>
+        <div id="quiz-container" class="my-4 quiz-container">
+            <h2 id="question">Question</h2>
+            <ul id="choices" class="list-group">
+            </ul>
+            <button id="submit-btn" class="btn btn-primary mt-4">Submit</button>
+            <button id="leaderboard-btn" class="btn btn-primary mt-4">Leaderboard</button>
+        </div>
+        <div id="scoreboard" class="my-4" style="display: none;">
+            <h2>Scoreboard</h2>
+            <p id="score"></p>
+            <p id="time"></p>
+        </div>
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <ol id="scores"></ol>
+        <button id="start-over-btn" class="btn btn-primary mt-4">Start Over</button>
+    </div>
+    </div>
+    </div>
 
-    <script src="./assets/script.js"></script>
 
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="assets/script.js"></script>
 </body>
 </html>

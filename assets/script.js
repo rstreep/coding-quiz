@@ -1,126 +1,186 @@
+const questions = [
+    {
+        question: "What does CSS stand for?",
+        choices: ["Coordinated Selective Styles", "Cascading Style Sheets", "Challenging Style Software", "Control System Shutdown"],
+        correctAnswer: 1
+    },
+    {
+        question: "Which tag will provide the largest size to a header?",
+        choices: ["<h1>", "<h3>", "<h4>", "<h6>"],
+        correctAnswer: 0
+    },
+    {
+        question: "An error(s) in code that impacts the way a program runs is refferred to as a ____",
+        choices: ["Splat", "Rat", "Bug", "Slug"],
+        correctAnswer: 2
+    },
+    {
+        question: "What does MERN stand for in coding?",
+        choices: ["Mangos, Eggplant, Raspberry, Nectarines", "MongoDB, Express, React, Node.js", "Monkey's eat raw noodles", "Modifiable Existential Raccoon Network"],
+        correctAnswer: 1
+    },
+    {
+        question: "Which of the following about HTML semantic tags is true?",
+        choices: ["Your code will break without the use of semantic tags", "Improper semantic tag use will result in your mom unfriending you on facebook", "There is no benefit to using semantic tags", "Semantic tags allow screen readers to better communicate your content to blind/visually impaired users"],
+        correctAnswer: 3
+    }
+];
 
-// variables for different parts of the quiz
-var start = document.querySelector('#start');
-var quiz = document.querySelector('#quiz');
-// var question = document.querySelector('#question');
-var question = document.getElementById("question");
-var optionA = document.querySelector('#optionA');
-var optionB = document.querySelector('#optionB');
-var optionC = document.querySelector('#optionC');
-var optionD = document.querySelector('#optionD');
-var username = "";
-var score = 0;
-var time = 99;
-var currentQuestionIndex = 0;
+let currentQuestion = 0;
+let score = 0;
+let timeRemaining = 90;
+let timerElement = document.getElementById("time-remaining");
+let timer;
 
-var questions = [
-    { question: "Question 1 goes here?",
-      choiceA: "Choice A goes here! 1",
-      choiceB: "Choice B goes here! 1",
-      choiceC: "Choice C goes here! 1",
-      choiceD: "Choice D goes here! 1",
-      correct: "A"},
-      { question: "Question 2 goes here?",
-      choiceA: "Choice A goes here! 2",
-      choiceB: "Choice B goes here! 2",
-      choiceC: "Choice C goes here! 2",
-      choiceD: "Choice D goes here! 2",
-      correct: "C"},
-      { question: "Question 3 goes here?",
-      choiceA: "Choice A goes here! 3",
-      choiceB: "Choice B goes here! 3",
-      choiceC: "Choice C goes here! 3",
-      choiceD: "Choice D goes here! 3",
-      correct: "D"},
-      { question: "Question 4 goes here?",
-      choiceA: "Choice A goes here! 4",
-      choiceB: "Choice B goes here! 4",
-      choiceC: "Choice C goes here! 4",
-      choiceD: "Choice D goes here! 4",
-      correct: "C"},
-      { question: "Question 5 goes here?",
-      choiceA: "Choice A goes here! 5",
-      choiceB: "Choice B goes here! 5",
-      choiceC: "Choice C goes here! 5",
-      choiceD: "Choice D goes here! 5",
-      correct: "B"},
-]
+function displayQuestion() {
+    const questionElement = document.getElementById("question");
+    const choicesElement = document.getElementById("choices");
 
-// start quiz 
+    questionElement.textContent = questions[currentQuestion].question;
+    choicesElement.innerHTML = "";
 
-start.onclick = function() {
-    startQuiz();
-};
-// hides start button and displays questions card
-function startQuiz(){
-    start.style.display = "none";
-    quiz.style.display = "flex";
-
-    renderQuestion(currentQuestionIndex);
-}
-// displays question properties based on array and checks user answer
-function renderQuestion(currentQuestion) {
-    var q = questions[currentQuestion];
-    question.innerText = q.question;
-
-    optionA.innerText = q.choiceA;
-    optionB.innerText = q.choiceB;
-    optionC.innerText = q.choiceC;
-    optionD.innerText = q.choiceD;
-
-    optionA.onclick = function() {
-        checkAnswer("A", currentQuestionIndex);
-        currentQuestionIndex+=1;
-       
-        if (currentQuestionIndex <= questions.length-1) {
-            renderQuestion(currentQuestionIndex);
-        } else{
-            endResult();
-        }
-    };
-    optionB.onclick = function() {
-        checkAnswer("B", currentQuestionIndex);
-        currentQuestionIndex+=1;
-       
-        if (currentQuestionIndex <= questions.length-1) {
-            renderQuestion(currentQuestionIndex);
-        } else{
-            endResult();
-        }
-    };
-    optionC.onclick = function() {
-        checkAnswer("C", currentQuestionIndex);
-        currentQuestionIndex+=1;
-       
-        if (currentQuestionIndex <= questions.length-1) {
-            renderQuestion(currentQuestionIndex);
-        } else{
-            endResult();
-        }
-    };
-    optionD.onclick = function() {
-        checkAnswer("D", currentQuestionIndex);
-        currentQuestionIndex+=1;
-       
-        if (currentQuestionIndex <= questions.length-1) {
-            renderQuestion(currentQuestionIndex);
-        } else{
-            endResult();
-        }
-    };
-}
-// incomplete: adds user score and decreases time based on correct/incorrect inputs
-function checkAnswer(userAnswer, questionNumber){
-    if(questions[questionNumber].correct == userAnswer){
-        console.log('is correct');
-        score + 20;
-    } else {
-        console.log('is wrong');
-        time - 10;
+    for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = questions[currentQuestion].choices[i];
+        li.addEventListener("click", handleAnswer);
+        choicesElement.appendChild(li);
     }
 }
-// incomplete: hides questions card and displays end result screen with score and username prompt to save score to local storage
-function endResult() {
-    console.log("end");
-    quiz.style.display = "none";
+
+function handleAnswer(event) {
+    const selectedChoice = event.target;
+    const selectedAnswer = selectedChoice.textContent;
+    const correctAnswer = questions[currentQuestion].choices[questions[currentQuestion].correctAnswer];
+
+    if (selectedAnswer === correctAnswer) {
+        score += 20;
+    } else {
+        timeRemaining -= 10;
+    }
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+        displayQuestion();
+    } else {
+        endQuiz();
+    }
 }
+
+function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+        if (timeRemaining > 0) {
+            timeRemaining--;
+            timerElement.textContent = timeRemaining;
+        } else {
+            clearInterval(timer);
+            endQuiz();
+        }
+    }, 1000);
+}
+
+function endQuiz() {
+    clearInterval(timer);
+
+    const quizContainer = document.getElementById("quiz-container");
+    const scoreElement = document.getElementById("score");
+    const timeElement = document.getElementById("time");
+    const leaderboard = document.getElementById("leaderboard");
+    const scoresElement = document.getElementById("scores");
+    const startOverBtn = document.getElementById("start-over-btn");
+
+    quizContainer.style.display = "none";
+
+    scoreElement.textContent = `Score: ${score}`;
+    timeElement.textContent = `Time Remaining: ${timeRemaining} seconds`;
+
+    const username = prompt("Enter your username");
+    const scoreData = { username: username, score: score, timeRemaining: timeRemaining };
+    const previousScores = JSON.parse(localStorage.getItem("quizScores")) || [];
+    previousScores.push(scoreData);
+    localStorage.setItem("quizScores", JSON.stringify(previousScores));
+
+    const sortedScores = previousScores.sort((a, b) => {
+        if (a.score === b.score) {
+            return b.timeRemaining - a.timeRemaining;
+        }
+        return b.score - a.score;
+    });
+
+    scoresElement.innerHTML = sortedScores
+        .map((scoreData, index) => `<li>Rank ${index + 1}: ${scoreData.username} - ${scoreData.score} points (${scoreData.timeRemaining} seconds remaining)</li>`)
+        .join("");
+
+    leaderboard.style.display = "block";
+    startOverBtn.style.display = "block";
+
+    startOverBtn.addEventListener('click', () => {
+        resetQuiz();
+        displayQuestion();
+        startTimer();
+    });
+}
+
+function highlightAnswer(event) {
+    event.target.classList.add("active");
+}
+
+function removeHighlightAnswer(event) {
+    event.target.classList.remove("active");
+}
+
+function resetQuiz() {
+    clearInterval(timer);
+    currentQuestion = 0;
+    score = 0;
+    timeRemaining = 90;
+    timerElement.textContent = timeRemaining;
+    document.getElementById("scoreboard").style.display = "none";
+    document.getElementById("leaderboard").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
+}
+
+function stopQuiz() {
+    clearInterval(timer);
+    const quizContainer = document.getElementById("quiz-container");
+    const scoreElement = document.getElementById("score");
+    const timeElement = document.getElementById("time");
+    const leaderboard = document.getElementById("leaderboard");
+    const scoresElement = document.getElementById("scores");
+    const startOverBtn = document.getElementById("start-over-btn");
+
+    quizContainer.style.display = "none";
+
+    scoreElement.textContent = `Score: ${score}`;
+    timeElement.textContent = `Time Remaining: ${timeRemaining} seconds`;
+
+    leaderboard.style.display = "block";
+    startOverBtn.style.display = "block";
+
+    const previousScores = JSON.parse(localStorage.getItem("quizScores")) || [];
+
+    const sortedScores = previousScores.sort((a, b) => {
+        if (a.score === b.score) {
+            return b.timeRemaining - a.timeRemaining;
+        }
+        return b.score - a.score;
+    });
+
+    scoresElement.innerHTML = sortedScores
+        .map((scoreData, index) => `<li>Rank ${index + 1}: ${scoreData.username} - ${scoreData.score} points (${scoreData.timeRemaining} seconds)</li>`)
+        .join("");
+
+    startOverBtn.addEventListener('click', () => {
+        resetQuiz();
+        displayQuestion();
+        startTimer();
+    });
+
+}
+
+displayQuestion();
+startTimer();
+
+document.getElementById('leaderboard-btn').addEventListener('click', stopQuiz);
