@@ -12,15 +12,19 @@ My goal with this challenge was to create from scratch a multiple choice quiz wi
 
 ### HTML:
 
-
+https://github.com/rstreep/coding-quiz/blob/main/assets/images/html1.png?raw=true
 
 ### CSS:
 
-
+https://github.com/rstreep/coding-quiz/blob/main/assets/images/css1.png?raw=true
+https://github.com/rstreep/coding-quiz/blob/main/assets/images/css2.png?raw=true
 
 ### JavaScript:
 
-
+https://github.com/rstreep/coding-quiz/blob/main/assets/images/js1.png?raw=true
+https://github.com/rstreep/coding-quiz/blob/main/assets/images/js2.png?raw=true
+https://github.com/rstreep/coding-quiz/blob/main/assets/images/js3.png?raw=true
+https://github.com/rstreep/coding-quiz/blob/main/assets/images/js4.png?raw=true
 
 ## Published Site
 https://rstreep.github.io/coding-quiz/
